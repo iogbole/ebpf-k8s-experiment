@@ -1,0 +1,11 @@
+{
+  "name": "sender-app",
+  "version": "1.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "scripts": {
+    "start": "node app.js"
+  }
+}

@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: israelo
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openmct
+spec:
+  selector:
+    matchLabels:
+      name: openmct
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: openmct
+    spec:
+      serviceAccountName: israelo
+      containers:
+        - name: openmct
+          image: iogbole/openmct:v1
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 8080
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: openmct
+spec:
+  selector:
+    name: openmct
+  ports:
+  - name: "8080"
+    port: 8080
+    targetPort: 8080
+  type: NodePort

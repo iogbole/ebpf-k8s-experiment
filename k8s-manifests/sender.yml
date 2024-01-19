@@ -1,0 +1,40 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sender
+  #namespace: ebpf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sender
+  template:
+    metadata:
+      labels:
+        app: sender
+    spec:
+      containers:
+      - name: sender
+        image: iogbole/node-sender:latest
+        ports:
+        - containerPort: 3000
+        env:
+          - name: RECEIVER_URL
+            valueFrom:
+              configMapKeyRef:
+                name: app-config
+                key: RECEIVER_URL
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sender-service
+spec:
+  selector:
+    app: sender
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  #namespace: ebpf
+data:
+  RECEIVER_URL: "http://receiver-service:80"
