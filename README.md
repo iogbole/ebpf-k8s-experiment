@@ -1,6 +1,5 @@
 
 # Kubernetes Application Overview
-
 This application comprises three main components:
 
 1. **OpenMCT App**: A web-based mission control framework for visualization of data on desktop and mobile devices, primarily used by NASA. This service is exposed over an ingress. See `k8s-manifests/openmct-gke-ingres.yml`
